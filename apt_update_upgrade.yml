@@ -1,0 +1,13 @@
+# ~/ansible-playbooks/update-upgrade.yml
+---
+- name: Update and upgrade apt packages
+  hosts: servers
+  become: yes
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Upgrade all packages
+      apt:
+        upgrade: dist
