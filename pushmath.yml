@@ -1,0 +1,11 @@
+---
+- name: Tag and push Docker image to repository
+  hosts: dockerrepo
+  become: yes
+  # Define the variables in the playbook or pass them via command line or inventory
+  tasks:
+    - name: Tag Docker image
+      command: docker tag math-multi 192.168.10.44:5000/mathapps/math-multi:latestlinux
+
+    - name: Push Docker image to repository
+      command: docker push 192.168.10.44:5000/mathapps/math-multi:latestlinux
