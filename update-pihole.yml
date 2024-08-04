@@ -1,0 +1,13 @@
+---
+- name: Update Pi-hole
+  hosts: pihole
+  become: yes
+  tasks:
+
+    - name: Update Pi-hole
+      command: pihole -up
+
+    - name: Restart Pi-hole service
+      service:
+        name: pihole-FTL
+        state: restarted
