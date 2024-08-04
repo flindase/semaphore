@@ -1,0 +1,19 @@
+---
+- name: Update Portainer
+  hosts: portainer_servers
+  become: yes
+
+  tasks:
+    - name: Stop Portainer container
+      command: docker stop portainer
+      ignore_errors: true
+
+    - name: Remove Portainer container
+      command: docker rm portainer
+      ignore_errors: true
+
+    - name: Pull the latest Portainer image
+      command: docker pull portainer/portainer-ce:latest
+
+    - name: Run the Portainer container
+      command: docker run -d -p 8000:8000 -p 9443:9443 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
